@@ -34,15 +34,17 @@ mqttClient.on('message', (topic, message) => {
     //////////////////
 
     MongoClient.connect(uri, function(err, client) {
-      const collection = client.db("Greenhouse").collection("records");
-      const data = JSON.parse(message+'');
-      collection.insertOne(data ? data : { m: 'error'}, function(err, res) {
-        if (err) throw err;
-        console.log("1 document inserted");
+      if (!err){
+        const collection = client.db("Greenhouse").collection("records");
+        const data = JSON.parse(message+'');
+        collection.insertOne(data ? data : { m: 'error'}, function(err, res) {
+          if (err) throw err;
+          console.log("1 document inserted");
+          client.close();
+        });
+        // perform actions on the collection object
         client.close();
-      });
-      // perform actions on the collection object
-      client.close();
+      }
     });
 
     /////////////////
