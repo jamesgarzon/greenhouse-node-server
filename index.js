@@ -1,5 +1,9 @@
 const MongoClient = require('mongodb').MongoClient;
 const mqtt = require('mqtt');
+const express = require('express')
+const path = require('path')
+const PORT = process.env.PORT || 5000
+
 const clientId = 'mqttjs_' + Math.random().toString(16).substr(2, 8)
 
 const mqttClient = mqtt.connect('mqtt://m16.cloudmqtt.com', {
@@ -45,3 +49,15 @@ mqttClient.on('message', (topic, message) => {
     // connected = (message.toString() === 'true');
   }
 });
+
+
+
+
+
+
+express()
+  .use(express.static(path.join(__dirname, 'public')))
+  .set('views', path.join(__dirname, 'views'))
+  .set('view engine', 'ejs')
+  .get('/', (req, res) => res.render('pages/index'))
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`))
