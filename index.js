@@ -1,8 +1,8 @@
 const MongoClient = require('mongodb').MongoClient;
 const mqtt = require('mqtt');
 const express = require('express')
-// const path = require('path')
-// const PORT = process.env.PORT || 5000
+const path = require('path')
+const PORT = process.env.PORT || 5000
 //
 // const clientId = 'mqttjs_' + Math.random().toString(16).substr(2, 8)
 //
