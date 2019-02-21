@@ -44,6 +44,8 @@ mqttClient.on('message', (topic, message) => {
         });
         // perform actions on the collection object
         client.close();
+      }else {
+        console.log('ERROR CONNECTING MONGOB :c');
       }
     });
 
